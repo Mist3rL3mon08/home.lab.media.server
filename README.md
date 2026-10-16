@@ -7,8 +7,8 @@ Proxmox VE hypervisor with a virtualised Ubuntu Server host for a
 Dockerised Jellyfin media stack.
 
 This project was built to develop hands-on skills in virtualisation,
-Linux administration, containerisation, and — as it turned out — a fair
-amount of network troubleshooting. I'm documenting the whole thing,
+Linux administration, containerisation, and as it turned out a fair
+amount of network troubleshooting. Im documenting the whole thing
 including the parts that didn't work the first time, because working
 through those problems is where most of the real learning happened.
 
@@ -16,24 +16,7 @@ through those problems is where most of the real learning happened.
 
 ## Why this project
 
-I'm building toward a career in **cybersecurity**, and a homelab is one of
-the best ways to learn the fundamentals that security work is built on:
-how machines get addresses, how services listen on ports, how isolation
-between systems actually works, and how to methodically diagnose a system
-that isn't behaving. You can't secure infrastructure you don't understand,
-so I set out to build some.
-
-The goal was deliberately practical: stand up a hypervisor, run an isolated
-VM on it, and host a real service (Jellyfin) inside a container — so that a
-misconfigured experiment can never take down the things I care about.
-
----
-
-## Architecture
-
-The design principle is layered isolation. Each layer sits inside the one
-before it, so a problem in an experimental VM can't reach the media stack.
-
+Im an aspiring Cyber security professional and what to build real world project that give me not only hands on experience but room for creativity
 ```
 HP ProDesk 400 G3 (bare metal)
   └─ Proxmox VE 9.2  ............ hypervisor / management plane
@@ -44,9 +27,9 @@ HP ProDesk 400 G3 (bare metal)
 
 | Layer      | Role                        | Address / Port          |
 |------------|-----------------------------|-------------------------|
-| Proxmox    | Hypervisor & web management | `:8006`                 |
-| Ubuntu VM  | Guest OS running containers | (own DHCP lease)        |
-| Jellyfin   | Media streaming service     | `:8096`                 |
+| Proxmox    | Hypervisor & web management |:8006                 |
+| Ubuntu VM  | Guest OS running containers |(own DHCP lease)        |
+| Jellyfin   | Media streaming service     |:8096                |
 
 ---
 
@@ -64,11 +47,11 @@ HP ProDesk 400 G3 (bare metal)
 
 1. Flashed the Proxmox VE ISO to USB and installed it to bare metal,
    wiping the previous OS.
-2. Reached the Proxmox web console and created an Ubuntu Server VM.
-3. Installed Ubuntu Server as a guest, enabling OpenSSH for remote admin.
-4. Installed Docker and Docker Compose inside the guest.
-5. Deployed Jellyfin via a Compose file (see `docker-compose.yml`).
-6. Verified the service end-to-end from another device on the LAN.
+2. Reached the Proxmox web console and created an Ubuntu Server VM
+3. Installed Ubuntu Server as a guest, enabling OpenSSH for remote admin
+4. Installed Docker and Docker Compose inside the guest
+5. Deployed Jellyfin via a Compose file (see docker-compose.yml)
+6. Verified the service end-to-end from another device on the LAN
 
 ### Problem 1 — Web console unreachable despite the host being "up"
 
@@ -149,14 +132,6 @@ which saved me from "fixing" something that wasn't broken.
 - [ ] Tailscale for secure remote access without inbound port forwarding
 - [ ] Automated backups of VM and container config
 - [ ] Centralised logging / basic monitoring
-
----
-
-## Repo contents
-
-- `README.md` — this file
-- `docker-compose.yml` — the Jellyfin service definition
-- `.gitignore` — excludes local config, cache, and media
 
 ---
 
